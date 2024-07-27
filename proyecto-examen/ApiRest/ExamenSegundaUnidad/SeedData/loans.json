@@ -1,0 +1,22 @@
+[
+  
+    {
+      "name": "Julio Rios",
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "loanAmount": 1000,
+      "commission": 2,
+      "interetRate": 10,
+      "disbursmentDate": "2024-07-27T01:05:16.745Z",
+      "firtsPaymentDate": "2024-08-27T01:05:16.745Z"
+    },
+    {
+      "name": "string",
+      "id": "e7f0ccb1-b5c7-441a-8013-a30b8a668a54",
+      "loanAmount": 1000,
+      "commission": 1,
+      "interetRate": 15,
+      "disbursmentDate": "2024-07-27T01:05:16.745Z",
+      "firtsPaymentDate": "2024-08-27T01:05:16.745Z"
+    }
+  
+]
