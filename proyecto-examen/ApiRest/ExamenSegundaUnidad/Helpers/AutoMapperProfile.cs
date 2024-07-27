@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using ExamenSegundaUnidad.Database.Entity;
+using ExamenSegundaUnidad.Dtos.New;
 
 namespace ExamenSegundaUnidad.Helpers
 {
@@ -6,14 +8,14 @@ namespace ExamenSegundaUnidad.Helpers
     {
         public AutoMapperProfile()
         {
-            MapsForEntity();
+            MapsForProspects();
         }
 
-        private void MapsForEntity()
+        private void MapsForProspects()
         {
-            //CreateMap<OrderEntity, OrderDto>(); // mapea los valores que coinciden entre donde se envia a donde se recibe
-            //CreateMap<OrderCreateDto, OrderEntity>();
-            //CreateMap<OrderEditDto, OrderEntity>();
+            CreateMap<ProspectsEntity, ProspectDto>(); // mapea los valores que coinciden entre donde se envia a donde se recibe
+            CreateMap<ProspectCreateDto, ProspectsEntity>();
+            CreateMap<ProspectEditDto, ProspectEntity>();
         }
 
     }

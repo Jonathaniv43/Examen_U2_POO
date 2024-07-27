@@ -11,7 +11,7 @@ namespace ExamenSegundaUnidad.Database.Context
 
         }
 
-        public DbSet<LoanEntity> Loans { get; set; }
+        public DbSet<ProspectsEntity> Prospects { get; set; }
         public DbSet<AmortizationDataEntity> AmortizationData { get; set; }
     }
 }

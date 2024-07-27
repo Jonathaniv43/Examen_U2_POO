@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ExamenSegundaUnidad.Migrations
 {
     /// <inheritdoc />
-    public partial class iniy : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,14 +15,16 @@ namespace ExamenSegundaUnidad.Migrations
                 name: "dbo");
 
             migrationBuilder.CreateTable(
-                name: "loans",
+                name: "prospects",
                 schema: "dbo",
                 columns: table => new
                 {
-                    loan_id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    identity_number = table.Column<int>(type: "int", nullable: false),
                     client_name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    client_id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    loan_amount = table.Column<bool>(type: "bit", nullable: false),
+                    loan_id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    loan_amount = table.Column<double>(type: "float", nullable: false),
+                    term = table.Column<int>(type: "int", nullable: false),
                     commision = table.Column<int>(type: "int", nullable: false),
                     interes_rate = table.Column<int>(type: "int", nullable: false),
                     disbursment_date = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -30,7 +32,7 @@ namespace ExamenSegundaUnidad.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_loans", x => x.loan_id);
+                    table.PrimaryKey("PK_prospects", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -39,24 +41,26 @@ namespace ExamenSegundaUnidad.Migrations
                 columns: table => new
                 {
                     amortization_id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    loan_id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     installment_number = table.Column<int>(type: "int", nullable: false),
+                    loan_id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     payment_date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     days = table.Column<int>(type: "int", nullable: false),
                     interes_date = table.Column<double>(type: "float", nullable: false),
-                    lv_payment_Svds = table.Column<double>(type: "float", nullable: false),
-                    lv_payment_no_Svds = table.Column<double>(type: "float", nullable: false),
+                    installment = table.Column<double>(type: "float", nullable: false),
+                    life_insurace = table.Column<double>(type: "float", nullable: false),
+                    lv_payment_LfIns = table.Column<double>(type: "float", nullable: false),
+                    lv_payment_no_LfIns = table.Column<double>(type: "float", nullable: false),
                     principal_balance = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_amortization", x => x.amortization_id);
                     table.ForeignKey(
-                        name: "FK_amortization_loans_loan_id",
+                        name: "FK_amortization_prospects_loan_id",
                         column: x => x.loan_id,
                         principalSchema: "dbo",
-                        principalTable: "loans",
-                        principalColumn: "loan_id",
+                        principalTable: "prospects",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -75,7 +79,7 @@ namespace ExamenSegundaUnidad.Migrations
                 schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "loans",
+                name: "prospects",
                 schema: "dbo");
         }
     }

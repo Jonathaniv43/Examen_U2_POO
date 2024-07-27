@@ -3,9 +3,9 @@ using ExamenSegundaUnidad.Dtos.New;
 
 namespace ExamenSegundaUnidad.Service.Interface
 {
-    public interface ILoanService
+    public interface IProspectsService
     {
-        Task<ResponseDto<LoanDto>> CreateLoanAsync(LoanCreateDto dto);
+        Task<ResponseDto<ProspectDto>> CreateProspectAsync(ProspectCreateDto dto);
 
     }
 }

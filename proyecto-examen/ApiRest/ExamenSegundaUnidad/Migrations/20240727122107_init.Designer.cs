@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExamenSegundaUnidad.Migrations
 {
     [DbContext(typeof(ProjectServiceDbContext))]
-    [Migration("20240727011622_iniy")]
-    partial class iniy
+    [Migration("20240727122107_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,6 +36,10 @@ namespace ExamenSegundaUnidad.Migrations
                         .HasColumnType("int")
                         .HasColumnName("days");
 
+                    b.Property<double>("Installment")
+                        .HasColumnType("float")
+                        .HasColumnName("installment");
+
                     b.Property<int>("InstallmentNumber")
                         .HasColumnType("int")
                         .HasColumnName("installment_number");
@@ -44,17 +48,21 @@ namespace ExamenSegundaUnidad.Migrations
                         .HasColumnType("float")
                         .HasColumnName("interes_date");
 
+                    b.Property<double>("LifeInsuranceOverDebt")
+                        .HasColumnType("float")
+                        .HasColumnName("life_insurace");
+
                     b.Property<Guid>("LoanId")
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("loan_id");
 
-                    b.Property<double>("LvPaymentNoSVSD")
+                    b.Property<double>("LvPaymentNoLinsurance")
                         .HasColumnType("float")
-                        .HasColumnName("lv_payment_no_Svds");
+                        .HasColumnName("lv_payment_no_LfIns");
 
-                    b.Property<double>("LvPaymentSVSD")
+                    b.Property<double>("LvPayment_Linsurance")
                         .HasColumnType("float")
-                        .HasColumnName("lv_payment_Svds");
+                        .HasColumnName("lv_payment_LfIns");
 
                     b.Property<DateTime>("PaymentDate")
                         .HasColumnType("datetime2")
@@ -71,16 +79,15 @@ namespace ExamenSegundaUnidad.Migrations
                     b.ToTable("amortization", "dbo");
                 });
 
-            modelBuilder.Entity("ExamenSegundaUnidad.Database.Entity.LoanEntity", b =>
+            modelBuilder.Entity("ExamenSegundaUnidad.Database.Entity.ProspectsEntity", b =>
                 {
-                    b.Property<Guid>("LoanId")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("loan_id");
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ClientId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("client_id");
+                    b.Property<string>("ClientName")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("client_name");
 
                     b.Property<int>("Commission")
                         .HasColumnType("int")
@@ -90,41 +97,49 @@ namespace ExamenSegundaUnidad.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("disbursment_date");
 
-                    b.Property<DateTime>("FirtsPaymentDate")
+                    b.Property<DateTime>("FirstPaymentDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("payment_date");
 
-                    b.Property<int>("InteretRate")
+                    b.Property<int>("Identity_Number")
+                        .HasColumnType("int")
+                        .HasColumnName("identity_number");
+
+                    b.Property<int>("InterestRate")
                         .HasColumnType("int")
                         .HasColumnName("interes_rate");
 
-                    b.Property<bool>("LoanAmount")
-                        .HasColumnType("bit")
+                    b.Property<double>("LoanAmount")
+                        .HasColumnType("float")
                         .HasColumnName("loan_amount");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("client_name");
+                    b.Property<Guid>("LoanId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("loan_id");
 
-                    b.HasKey("LoanId");
+                    b.Property<int>("Term")
+                        .HasColumnType("int")
+                        .HasColumnName("term");
 
-                    b.ToTable("loans", "dbo");
+                    b.HasKey("Id");
+
+                    b.ToTable("prospects", "dbo");
                 });
 
             modelBuilder.Entity("ExamenSegundaUnidad.Database.Entity.AmortizationDataEntity", b =>
                 {
-                    b.HasOne("ExamenSegundaUnidad.Database.Entity.LoanEntity", "Loan")
-                        .WithMany("Amortizations")
+                    b.HasOne("ExamenSegundaUnidad.Database.Entity.ProspectsEntity", "LoanIdentification")
+                        .WithMany("AmortizationDataEntities")
                         .HasForeignKey("LoanId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Loan");
+                    b.Navigation("LoanIdentification");
                 });
 
-            modelBuilder.Entity("ExamenSegundaUnidad.Database.Entity.LoanEntity", b =>
+            modelBuilder.Entity("ExamenSegundaUnidad.Database.Entity.ProspectsEntity", b =>
                 {
-                    b.Navigation("Amortizations");
+                    b.Navigation("AmortizationDataEntities");
                 });
 #pragma warning restore 612, 618
         }

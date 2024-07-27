@@ -25,7 +25,7 @@ namespace ExamenSegundaUnidad
      
                 services.AddDbContext<ProjectServiceDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
       
-                services.AddTransient<LoanService, LoanService>();
+                services.AddTransient<IProspectsService, ProspectsService>();
 
 
                 // Add AutoMapper

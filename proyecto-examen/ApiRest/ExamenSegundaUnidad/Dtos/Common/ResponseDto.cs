@@ -5,7 +5,7 @@ namespace ExamenSegundaUnidad.Dtos.Common
     public class ResponseDto<T>
     {
         
-          public T Data { get; set; }
+          public T AmortizationPlan { get; set; }
           public string Message { get; set; }
 
           [JsonIgnore]

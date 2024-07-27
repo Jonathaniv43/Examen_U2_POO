@@ -9,20 +9,20 @@ namespace ExamenSegundaUnidad.Controllers
 {
     [Route("api/loans")]
     [ApiController]
-    public class LoanController : ControllerBase
+    public class ProspectsController : ControllerBase
     {
-        private readonly ILoanService _loanService;
+        private readonly IProspectsService _prospectService;
 
-        public LoanController(ILoanService loanService)
+        public ProspectsController(IProspectsService loanService)
         {
-            this._loanService = loanService;
+            this._prospectService = loanService;
         }
 
 
         [HttpPost]
-        public async Task<ActionResult<ResponseDto<LoanDto>>> Create(LoanCreateDto dto)
+        public async Task<ActionResult<ResponseDto<ProspectDto>>> Create(ProspectCreateDto dto)
         {
-            var response = await _loanService.CreateLoanAsync(dto);
+            var response = await _prospectService.CreateProspectAsync(dto);
             return StatusCode(response.StatusCode, new
             {
                 response.Status,

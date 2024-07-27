@@ -29,16 +29,16 @@ namespace ExamenSegundaUnidad.Database.SeederLog
             {
                 var jsonFilePath = "SeedData/loans.json";
                 var jsonContent = await File.ReadAllTextAsync(jsonFilePath);
-                var news = JsonConvert.DeserializeObject<List<LoanEntity>>(jsonContent);
+                var news = JsonConvert.DeserializeObject<List<ProspectsEntity>>(jsonContent);
 
-                if (!await context.Loans.AnyAsync())
+                if (!await context.Prospects.AnyAsync())
                 {
                     //foreach (var n in News)
                     //{
                     //    n.OrderDate = DateTime.Now;
                     //}
 
-                    await context.Loans.AddRangeAsync(news);
+                    await context.Prospects.AddRangeAsync(news);
                     await context.SaveChangesAsync();
                 }
             }
